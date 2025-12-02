@@ -19,7 +19,7 @@ async function bootstrap(): Promise<void> {
   // 2. Load CSV data
   const csvLoader = container.get<CsvLoader>(TYPES.CsvLoader);
   const movieRepository = container.get<IMovieRepository>(TYPES.MovieRepository);
-  
+
   const csvPath = process.env.CSV_PATH || path.join(__dirname, '..', 'data', 'movielist.csv');
   const movies = csvLoader.load(csvPath);
   await movieRepository.saveAll(movies);
@@ -37,7 +37,7 @@ async function bootstrap(): Promise<void> {
   });
 }
 
-bootstrap().catch((error) => {
+bootstrap().catch(error => {
   console.error('Failed to start application:', error);
   process.exit(1);
 });

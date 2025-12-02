@@ -15,7 +15,7 @@ export class CsvLoader {
 
     return dataLines.map(line => {
       const values = this.parseCsvLine(line);
-      
+
       return {
         year: parseInt(values[0], 10),
         title: values[1],
@@ -46,4 +46,3 @@ export class CsvLoader {
     return values;
   }
 }
-

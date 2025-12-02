@@ -28,9 +28,9 @@ describe('Health Check API', () => {
 
     it('should return a valid timestamp', async () => {
       const response = await request(app).get('/api/health');
-      
+
       expect(response.body).toHaveProperty('timestamp');
-      
+
       const timestamp = new Date(response.body.timestamp);
       expect(timestamp).toBeInstanceOf(Date);
       expect(timestamp.getTime()).not.toBeNaN();
