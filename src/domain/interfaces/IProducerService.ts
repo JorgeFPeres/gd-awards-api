@@ -11,6 +11,5 @@ export interface AwardsIntervalResponse {
 }
 
 export interface IProducerService {
-  getAwardsInterval(): AwardsIntervalResponse;
+  getAwardsInterval(): Promise<AwardsIntervalResponse>;
 }
-
