@@ -10,8 +10,7 @@ export class CsvLoader {
     const content = fs.readFileSync(absolutePath, 'utf-8');
     const lines = content.split('\n').filter(line => line.trim() !== '');
 
-    // First line is header
-    const header = lines[0].split(';');
+    // Skip header line
     const dataLines = lines.slice(1);
 
     return dataLines.map(line => {
