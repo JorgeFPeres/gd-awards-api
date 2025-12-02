@@ -10,8 +10,8 @@ router.get('/health', (req, res) => {
   healthController.check(req, res);
 });
 
-router.get('/producers/awards-interval', (req, res) => {
-  producerController.getAwardsInterval(req, res);
+router.get('/producers/awards-interval', (req, res, next) => {
+  producerController.getAwardsInterval(req, res, next);
 });
 
 export { router };

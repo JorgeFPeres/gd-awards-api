@@ -3,6 +3,7 @@ import express from 'express';
 import path from 'path';
 import { initializeDatabase } from './infrastructure/database/Database';
 import { router } from './infrastructure/http/routes';
+import { errorHandler } from './infrastructure/http/middlewares/errorHandler';
 import { container } from './config/container';
 import { CsvLoader } from './infrastructure/csv/CsvLoader';
 import { IMovieRepository } from './domain/interfaces/IMovieRepository';
@@ -28,6 +29,7 @@ async function bootstrap(): Promise<void> {
   const app = express();
   app.use(express.json());
   app.use(router);
+  app.use(errorHandler);
 
   // 4. Start server
   app.listen(PORT, () => {
@@ -39,4 +41,3 @@ bootstrap().catch((error) => {
   console.error('Failed to start application:', error);
   process.exit(1);
 });
-
