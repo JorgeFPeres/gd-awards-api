@@ -1,13 +1,15 @@
 import { injectable, inject } from 'inversify';
 import { IMovieRepository } from '../interfaces/IMovieRepository';
-import { IProducerService, AwardsIntervalResponse, ProducerInterval } from '../interfaces/IProducerService';
+import {
+  IProducerService,
+  AwardsIntervalResponse,
+  ProducerInterval,
+} from '../interfaces/IProducerService';
 import { TYPES } from '../../config/types';
 
 @injectable()
 export class ProducerService implements IProducerService {
-  constructor(
-    @inject(TYPES.MovieRepository) private movieRepository: IMovieRepository
-  ) {}
+  constructor(@inject(TYPES.MovieRepository) private movieRepository: IMovieRepository) {}
 
   async getAwardsInterval(): Promise<AwardsIntervalResponse> {
     const winners = await this.movieRepository.findAllWinners();
@@ -17,7 +19,7 @@ export class ProducerService implements IProducerService {
 
     for (const movie of winners) {
       const producers = this.parseProducers(movie.producers);
-      
+
       for (const producer of producers) {
         const wins = producerWins.get(producer) || [];
         wins.push(movie.year);
@@ -62,11 +64,10 @@ export class ProducerService implements IProducerService {
   private parseProducers(producersString: string): string[] {
     // Split by comma and "and"
     // "Producer A, Producer B and Producer C" -> ["Producer A", "Producer B", "Producer C"]
-    
+
     return producersString
       .split(/,|\sand\s/)
       .map(p => p.trim())
       .filter(p => p.length > 0);
   }
 }
-
