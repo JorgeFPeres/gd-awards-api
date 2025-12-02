@@ -28,7 +28,7 @@ async function bootstrap(): Promise<void> {
   // 3. Setup Express
   const app = express();
   app.use(express.json());
-  app.use(router);
+  app.use('/api', router);
   app.use(errorHandler);
 
   // 4. Start server

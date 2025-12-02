@@ -15,19 +15,19 @@ describe('Health Check API', () => {
     await teardownApp();
   });
 
-  describe('GET /health', () => {
+  describe('GET /api/health', () => {
     it('should return status 200', async () => {
-      const response = await request(app).get('/health');
+      const response = await request(app).get('/api/health');
       expect(response.status).toBe(StatusCodes.OK);
     });
 
     it('should return ok status', async () => {
-      const response = await request(app).get('/health');
+      const response = await request(app).get('/api/health');
       expect(response.body).toHaveProperty('status', 'ok');
     });
 
     it('should return a valid timestamp', async () => {
-      const response = await request(app).get('/health');
+      const response = await request(app).get('/api/health');
       
       expect(response.body).toHaveProperty('timestamp');
       
@@ -37,9 +37,8 @@ describe('Health Check API', () => {
     });
 
     it('should return JSON content type', async () => {
-      const response = await request(app).get('/health');
+      const response = await request(app).get('/api/health');
       expect(response.headers['content-type']).toMatch(/application\/json/);
     });
   });
 });
-

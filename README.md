@@ -45,10 +45,12 @@ A API estará disponível em `http://localhost:3001`
 
 ## Endpoints
 
+Base URL: `http://localhost:3001/api`
+
 ### Health Check
 
 ```
-GET /health
+GET /api/health
 ```
 
 **Resposta:**
@@ -62,7 +64,7 @@ GET /health
 ### Intervalo de Prêmios dos Produtores
 
 ```
-GET /producers/awards-interval
+GET /api/producers/awards-interval
 ```
 
 Retorna o(s) produtor(es) com **maior** intervalo entre dois prêmios consecutivos e o(s) produtor(es) com **menor** intervalo.

@@ -22,7 +22,7 @@ export async function setupApp(csvPath?: string): Promise<Express> {
 
   app = express();
   app.use(express.json());
-  app.use(router);
+  app.use('/api', router);
 
   return app;
 }
@@ -34,4 +34,3 @@ export async function teardownApp(): Promise<void> {
 }
 
 export { app };
-

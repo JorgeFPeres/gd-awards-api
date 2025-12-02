@@ -15,14 +15,14 @@ describe('Producer Awards Interval API', () => {
     await teardownApp();
   });
 
-  describe('GET /producers/awards-interval', () => {
+  describe('GET /api/producers/awards-interval', () => {
     it('should return status 200', async () => {
-      const response = await request(app).get('/producers/awards-interval');
+      const response = await request(app).get('/api/producers/awards-interval');
       expect(response.status).toBe(StatusCodes.OK);
     });
 
     it('should return an object with min and max arrays', async () => {
-      const response = await request(app).get('/producers/awards-interval');
+      const response = await request(app).get('/api/producers/awards-interval');
       
       expect(response.body).toHaveProperty('min');
       expect(response.body).toHaveProperty('max');
@@ -31,7 +31,7 @@ describe('Producer Awards Interval API', () => {
     });
 
     it('should return valid interval objects with required fields', async () => {
-      const response = await request(app).get('/producers/awards-interval');
+      const response = await request(app).get('/api/producers/awards-interval');
       
       if (response.body.min.length > 0) {
         const minItem = response.body.min[0];
@@ -55,7 +55,7 @@ describe('Producer Awards Interval API', () => {
     });
 
     it('should have followingWin greater than previousWin', async () => {
-      const response = await request(app).get('/producers/awards-interval');
+      const response = await request(app).get('/api/producers/awards-interval');
       
       for (const item of response.body.min) {
         expect(item.followingWin).toBeGreaterThan(item.previousWin);
@@ -69,7 +69,7 @@ describe('Producer Awards Interval API', () => {
     });
 
     it('should have min interval less than or equal to max interval', async () => {
-      const response = await request(app).get('/producers/awards-interval');
+      const response = await request(app).get('/api/producers/awards-interval');
       
       if (response.body.min.length > 0 && response.body.max.length > 0) {
         const minInterval = response.body.min[0].interval;
