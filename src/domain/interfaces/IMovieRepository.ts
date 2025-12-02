@@ -1,10 +1,8 @@
 import { Movie } from '../entities/Movie';
 
-
 export interface IMovieRepository {
-  save(movie: Movie): void;
-  saveAll(movies: Movie[]): void;
-  findAllWinners(): Movie[];
-  findAll(): Movie[];
+  save(movie: Partial<Movie>): Promise<void>;
+  saveAll(movies: Partial<Movie>[]): Promise<void>;
+  findAllWinners(): Promise<Movie[]>;
+  findAll(): Promise<Movie[]>;
 }
-

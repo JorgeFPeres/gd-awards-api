@@ -21,6 +21,7 @@
     "express": "^4.18.2",
     "inversify": "^6.0.2",
     "reflect-metadata": "^0.2.1",
+    "typeorm": "^0.3.19",
     "better-sqlite3": "^9.2.2"
   },
   "devDependencies": {
@@ -34,4 +35,3 @@
     "@types/supertest": "^6.0.2"
   }
 }
-
