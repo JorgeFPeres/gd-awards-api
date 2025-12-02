@@ -5,18 +5,18 @@ export class Movie {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ type: 'int' })
   year!: number;
 
-  @Column()
+  @Column({ type: 'varchar' })
   title!: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   studios!: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   producers!: string;
 
-  @Column({ default: false })
+  @Column({ type: 'boolean', default: false })
   winner!: boolean;
 }
