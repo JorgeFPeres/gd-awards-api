@@ -3,9 +3,14 @@ import * as path from 'path';
 import { injectable } from 'inversify';
 import { Movie } from '../../domain/entities/Movie';
 
+export interface MovieWithProducers {
+  movie: Partial<Movie>;
+  producerNames: string[];
+}
+
 @injectable()
 export class CsvLoader {
-  load(filePath: string): Partial<Movie>[] {
+  load(filePath: string): MovieWithProducers[] {
     const absolutePath = path.resolve(filePath);
     const content = fs.readFileSync(absolutePath, 'utf-8');
     const lines = content.split('\n').filter(line => line.trim() !== '');
@@ -15,15 +20,26 @@ export class CsvLoader {
 
     return dataLines.map(line => {
       const values = this.parseCsvLine(line);
+      const producerNames = this.parseProducers(values[3]);
 
       return {
-        year: parseInt(values[0], 10),
-        title: values[1],
-        studios: values[2],
-        producers: values[3],
-        winner: values[4]?.toLowerCase() === 'yes',
+        movie: {
+          year: parseInt(values[0], 10),
+          title: values[1],
+          studios: values[2],
+          producers: values[3],
+          winner: values[4]?.toLowerCase() === 'yes',
+        },
+        producerNames,
       };
     });
+  }
+
+  private parseProducers(producersString: string): string[] {
+    return producersString
+      .split(/,|\sand\s/)
+      .map(p => p.trim())
+      .filter(p => p.length > 0);
   }
 
   private parseCsvLine(line: string): string[] {

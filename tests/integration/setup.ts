@@ -17,8 +17,8 @@ export async function setupApp(csvPath?: string): Promise<Express> {
   const movieRepository = container.get<IMovieRepository>(TYPES.MovieRepository);
 
   const filePath = csvPath || path.join(__dirname, '..', '..', 'data', 'movielist.csv');
-  const movies = csvLoader.load(filePath);
-  await movieRepository.saveAll(movies);
+  const moviesData = csvLoader.load(filePath);
+  await movieRepository.saveAllWithProducers(moviesData);
 
   app = express();
   app.use(express.json());

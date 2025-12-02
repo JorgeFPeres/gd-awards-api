@@ -21,9 +21,9 @@ async function bootstrap(): Promise<void> {
   const movieRepository = container.get<IMovieRepository>(TYPES.MovieRepository);
 
   const csvPath = process.env.CSV_PATH || path.join(__dirname, '..', 'data', 'movielist.csv');
-  const movies = csvLoader.load(csvPath);
-  await movieRepository.saveAll(movies);
-  console.log(`Loaded ${movies.length} movies from CSV`);
+  const moviesData = csvLoader.load(csvPath);
+  await movieRepository.saveAllWithProducers(moviesData);
+  console.log(`Loaded ${moviesData.length} movies from CSV`);
 
   // 3. Setup Express
   const app = express();
